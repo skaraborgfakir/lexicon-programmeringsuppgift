@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Uppgift {
+    BufferedReader reader;
+
     //
     // 1
     //
@@ -98,13 +100,14 @@ public class Uppgift {
 		ValLoop=0;
 	    }
 	};
-	return System.in.readLine();
+
+	int valdFunktion = reader.nextInt();
     }
 
     public static void main(String[] args)
 	throws IOException
     {
-	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	reader = new BufferedReader(new InputStreamReader(System.in));
 	// String name = reader.readLine();
 	int ValdFunktion = 1;
 	while (ValdFunktion != 0)
