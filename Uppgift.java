@@ -53,6 +53,24 @@ public class Uppgift {
     // läs in två tal (rella/naturliga etc) och ange vilket som är störst
     //
     private static void StörstTal() {
+	Double förstaTalet=0.0;
+	Double andraTalet=0.0;
+
+	if ( tangentbordsläsare.hasNextDouble())
+	    förstaTalet = tangentbordsläsare.nextDouble();
+
+	if ( tangentbordsläsare.hasNextDouble())
+	    andraTalet = tangentbordsläsare.nextDouble();
+
+	if ( förstaTalet >= andraTalet )
+	    {
+		System.out.println(förstaTalet);
+	    }
+	else
+	    {
+		System.out.println(andraTalet);
+	    }
+
     }
     //
     // 6
