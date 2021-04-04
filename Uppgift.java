@@ -1,7 +1,15 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+//import java.io.InputStreamReader;
 import java.util.Scanner;
+//import java.util.Calendar;
+// import java.util.GregorianCalendar;
+import java.util.Date;
+import java.text.DateFormat;
+import java.util.Locale;
+import java.time.ZonedDateTime;
+import java.time.format.FormatStyle;
+import java.time.format.DateTimeFormatter;
 
 public class Uppgift {
     // BufferedReader reader;
@@ -30,8 +38,16 @@ public class Uppgift {
     //
     // 4
     //
-    private static void DagensDatum() {
-	System.out.println( "DagensDatum Hello world");
+    private static void DagensDatum()
+    {
+	Locale standardlokalisering = Locale.getDefault();
+	Date idag = new Date();
+	DateFormat datumformatterare = DateFormat.getDateInstance( DateFormat.DEFAULT, standardlokalisering);
+	String klockslaget = datumformatterare.format(idag);
+
+	System.out.println( "Dagens datum : " + klockslaget);
+
+	System.out.println();
     }
     //
     // 5
@@ -120,6 +136,8 @@ public class Uppgift {
 	int ValLoop = 1;
 	boolean Klart = false;
 	while ( !Klart ) {
+	    if ( ValLoop==0 )
+		System.out.println();
 	    System.out.print( ValLoop);
 	    System.out.print( " ");
 	    System.out.println( TillgängligaVal[ValLoop]);
@@ -130,21 +148,22 @@ public class Uppgift {
 		ValLoop=0;
 	    }
 	};
+	System.out.println();
 
 	int valdFunktion=0;
-	boolean inputfel=false;
-	do {
-	    try
+	boolean inputfel=true;
+	while (inputfel) {
+	    System.out.print( "välj siffrorna för något av alternativen: ");
+	    if ( tangentbordsläsare.hasNextInt())
+		valdFunktion = tangentbordsläsare.nextInt();
+	    else
 		{
-		    System.out.println( "välj siffrorna för något av alternativen");
-		    valdFunktion = tangentbordsläsare.nextInt();
-		    inputfel=false;
-		}
-	    catch (Exception fel) {
-		    inputfel=true;
 		    tangentbordsläsare.next();
+		    continue;
 		}
-	} while (inputfel) ;
+
+	    inputfel=false;
+	}
 
 	return valdFunktion;
     }
