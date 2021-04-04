@@ -126,12 +126,25 @@ public class Uppgift {
 	    if ( ValLoop==0 )
 		Klart = true;
 	    ValLoop = ValLoop+1;
-	    if (ValLoop==5) {
+	    if (ValLoop==TillgängligaVal.length) {
 		ValLoop=0;
 	    }
 	};
 
-	int valdFunktion = tangentbordsläsare.nextInt();
+	int valdFunktion=0;
+	boolean inputfel=false;
+	do {
+	    try
+		{
+		    System.out.println( "välj siffrorna för något av alternativen");
+		    valdFunktion = tangentbordsläsare.nextInt();
+		    inputfel=false;
+		}
+	    catch (Exception fel) {
+		    inputfel=true;
+		    tangentbordsläsare.next();
+		}
+	} while (inputfel) ;
 
 	return valdFunktion;
     }
