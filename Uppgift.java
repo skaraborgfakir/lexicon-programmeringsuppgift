@@ -44,13 +44,13 @@ public class Uppgift {
 	Date idag = new Date();
 	DateFormat datumformatterare = DateFormat.getDateInstance( DateFormat.DEFAULT, standardlokalisering);
 	String klockslaget = datumformatterare.format(idag);
-
 	System.out.println( "Dagens datum : " + klockslaget);
-
 	System.out.println();
     }
     //
     // 5
+    //
+    // läs in två tal (rella/naturliga etc) och ange vilket som är störst
     //
     private static void StörstTal() {
     }
