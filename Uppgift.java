@@ -1,3 +1,6 @@
+// Time-stamp: <2021-04-05 12:51:03 stefan>
+//
+
 import java.io.BufferedReader;
 import java.io.IOException;
 //import java.io.InputStreamReader;
@@ -56,26 +59,31 @@ public class Uppgift {
 	Double förstaTalet=0.0;
 	Double andraTalet=0.0;
 
+	System.out.println( "Mata in två tal och få som svar vilket av dem som är störst");
+	System.out.print( "Första talet:");
+
 	if ( tangentbordsläsare.hasNextDouble())
 	    förstaTalet = tangentbordsläsare.nextDouble();
 
+	System.out.print( "Andra talet:");
 	if ( tangentbordsläsare.hasNextDouble())
 	    andraTalet = tangentbordsläsare.nextDouble();
 
-	if ( förstaTalet >= andraTalet )
-	    {
+	System.out.print( "Det största talet är:");
+	if ( förstaTalet >= andraTalet ) {
 		System.out.println(förstaTalet);
-	    }
-	else
-	    {
-		System.out.println(andraTalet);
-	    }
+	}
+	else {
+	    System.out.println(andraTalet);
+	}
 
     }
     //
     // 6
     //
     private static void GissaEttNummer() {
+	System.out.println( "Gissningsleken: gissa ett tal!");
+
     }
     //
     // 7
@@ -91,6 +99,7 @@ public class Uppgift {
     // 9
     //
     private static void RäkningPåReellaTal() {
+	System.out.println( "Beräkning av roten av och 10-potens för ett decimaltal");
     }
     //
     // 10
@@ -99,6 +108,36 @@ public class Uppgift {
 	//
 	// multiplikationstabell för talen 1-10
 	//
+	int max=10;
+	int tal1 = 1, tal2 = 1;
+	// radhuvud
+	System.out.print( "   ");
+	for (tal1 = 1; tal1 <= 10; tal1++)
+	    if ( tal1 >= 10 )
+		System.out.print( "   "+ tal1);
+	    else
+		System.out.print( "    "+ tal1);
+	System.out.println();
+
+	for (tal2 = 1; tal2 <= 10; tal2++)
+	    {
+		if (tal2<10)
+		    System.out.print( " ");
+		System.out.print( " " + tal2);
+
+		for (tal1 = 1; tal1 <= 10; tal1++)
+		    {
+			if ( ( tal1 * tal2 ) < 100)
+			    System.out.print( " ");
+			if ( ( tal1 * tal2 ) < 10)
+			    System.out.print( " ");
+
+			System.out.print( "  "+ tal1 * tal2 );
+		    }
+		System.out.println();
+	    }
+
+	System.out.println();
     }
     //
     // 11
@@ -148,7 +187,15 @@ public class Uppgift {
 	    "Byt konsollens färg",
 	    "Dagens datum",
 	    "Största Talet",
-
+	    "Gissningsleken: gissa ett tal",
+	    "Spara en rad i en fil",
+	    "Läs samma rad från filen",
+	    "Rot- och 10-potensberäkning",
+	    "Multiplikationstabell 1-10",
+	    "Matriser",
+	    "Palindromtest",
+	    "Uppräkning av tal",
+	    "Sortering av talfölj"
 	};
 
 	int ValLoop = 1;
