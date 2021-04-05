@@ -1,23 +1,21 @@
-// Time-stamp: <2021-04-05 13:42:13 stefan>
+// Time-stamp: <2021-04-05 21:10:21 stefan>
 //
 
 import java.io.BufferedReader;
 import java.io.IOException;
-//import java.io.InputStreamReader;
+import java.io.File;
 import java.util.Scanner;
-//import java.util.Calendar;
-// import java.util.GregorianCalendar;
 import java.util.Date;
 import java.text.DateFormat;
 import java.util.Locale;
 import java.time.ZonedDateTime;
 import java.time.format.FormatStyle;
 import java.time.format.DateTimeFormatter;
+//import java.lang.Math;
 
 public class Uppgift {
-    // BufferedReader reader;
     static Scanner tangentbordsläsare;
-    static boolean iReverse = false;
+    static boolean iReverse = false;    // används för reverse-video delen
 
     //
     // 1
@@ -25,13 +23,21 @@ public class Uppgift {
     private static void Helloworld()
     {
 	System.out.println( "Hello world");
+	System.out.println( );
     }
     //
     // 2
     //
     private static void InputNamn() {
+	System.out.println( );
+
 	System.out.print("Mata in ett namn:");
-	String namn = tangentbordsläsare.nextLine();
+	while (!tangentbordsläsare.hasNext())
+	    {
+	    }
+	String namn = tangentbordsläsare.next();
+	System.out.println( "du skrev " + namn);
+	System.out.println( );
     }
     //
     // 3
@@ -42,7 +48,6 @@ public class Uppgift {
     //      ESC[?5;l (avaktivering)
     //
     private static void BytFärg() {
-	// System.out.print( "\0[?6;h");
 	if ( iReverse ) {
 	    System.out.print( "\033[?5;l");
 	    iReverse=false;
@@ -60,6 +65,8 @@ public class Uppgift {
 	Date idag = new Date();
 	DateFormat datumformatterare = DateFormat.getDateInstance( DateFormat.DEFAULT, standardlokalisering);
 	String klockslaget = datumformatterare.format(idag);
+
+	System.out.println();
 	System.out.println( "Dagens datum : " + klockslaget);
 	System.out.println();
     }
@@ -72,9 +79,10 @@ public class Uppgift {
 	Double förstaTalet=0.0;
 	Double andraTalet=0.0;
 
-	System.out.println( "Mata in två tal och få som svar vilket av dem som är störst");
-	System.out.print( "Första talet:");
+	System.out.println();
+	System.out.println( "Mata in två tal och få som svar vilket av dem som är störst (reella tal med \",\" som separering mot decimalerna)");
 
+	System.out.print( "Första talet:");
 	if ( tangentbordsläsare.hasNextDouble())
 	    förstaTalet = tangentbordsläsare.nextDouble();
 
@@ -82,14 +90,9 @@ public class Uppgift {
 	if ( tangentbordsläsare.hasNextDouble())
 	    andraTalet = tangentbordsläsare.nextDouble();
 
-	System.out.print( "Det största talet är:");
-	if ( förstaTalet >= andraTalet ) {
-		System.out.println(förstaTalet);
-	}
-	else {
-	    System.out.println(andraTalet);
-	}
-
+	System.out.print( "Det största talet är: ");
+	System.out.println( Math.max(förstaTalet,andraTalet));
+	System.out.println();
     }
     //
     // 6
@@ -102,18 +105,50 @@ public class Uppgift {
     // 7
     //
     private static void SkrivEnRadTillFil() {
+	String dumpFilNamn = "en_datasamling";
+
+	//	string = System.in.readln(
     }
     //
     // 8
     //
     private static void LäsEnRadFrånFil() {
+	String dumpFilNamn = "en_datasamling";
+
+	// använd scanner
+	try
+	    {
+		Scanner läsFrånFil = new Scanner( new File( "./en_datasamling"));
+		läsFrånFil.close();
+	    }
+	catch (Exception ickeExisterandeFil) {
+	}
+
+	// while ( läsFrånFil.hasNextLong())
+	//     {
+	//	//string rad = läsfrånfil.
+	//	//System.out.println( rad);
+	//     }
     }
+
     //
     // 9
     //
     private static void RäkningPåReellaTal() {
+	double talet=0.0;
+
+	System.out.println();
 	System.out.println( "Beräkning av roten av och 10-potens för ett decimaltal");
+
+	System.out.print( "Vilket tal: ");
+	if ( tangentbordsläsare.hasNextDouble())
+	    talet = tangentbordsläsare.nextDouble();
+
+	System.out.println( "Talets rot: " + Math.sqrt(talet));
+	System.out.println( "Talets 10:exponent: " + Math.pow( talet, 10.0));
+	System.out.println();
     }
+
     //
     // 10
     //
