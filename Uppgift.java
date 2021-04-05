@@ -1,4 +1,4 @@
-// Time-stamp: <2021-04-05 12:51:03 stefan>
+// Time-stamp: <2021-04-05 13:42:13 stefan>
 //
 
 import java.io.BufferedReader;
@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 public class Uppgift {
     // BufferedReader reader;
     static Scanner tangentbordsläsare;
+    static boolean iReverse = false;
 
     //
     // 1
@@ -35,8 +36,20 @@ public class Uppgift {
     //
     // 3
     //
+    // i XTerm (ursprunget är VT100)
+    //     DECSCNM
+    //      ESC[?5;h (aktivering)
+    //      ESC[?5;l (avaktivering)
+    //
     private static void BytFärg() {
-	System.out.println( "BytFärg Hello world");
+	// System.out.print( "\0[?6;h");
+	if ( iReverse ) {
+	    System.out.print( "\033[?5;l");
+	    iReverse=false;
+	} else {
+	    System.out.print( "\033[?5;h");
+	    iReverse=true;
+	}
     }
     //
     // 4
