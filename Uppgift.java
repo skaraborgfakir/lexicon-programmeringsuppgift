@@ -1,5 +1,5 @@
 //
-// Time-stamp: <2021-04-07 13:43:43 stefan>
+// Time-stamp: <2021-04-07 14:47:52 stefan>
 //
 
 // import java.io.BufferedReader;
@@ -9,13 +9,16 @@ import java.text.DateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Formatter;
-import java.util.Locale;
-import java.util.Random;
-import java.util.regex.Pattern;
-import java.util.Scanner;
+import java.util.*;
+// import java.util.ArrayList;
+// import java.util.Collections;
+// import java.util.Date;
+// import java.util.Formatter;
+// import java.util.List;
+// import java.util.Locale;
+// import java.util.Random;
+// import java.util.regex.Pattern;
+// import java.util.Scanner;
 
 //import java.lang.Math;
 
@@ -213,8 +216,15 @@ public class Uppgift {
 	System.out.println( "Beräkning av roten av och 10-potens för ett decimaltal");
 
 	System.out.print( "Vilket tal: ");
-	if ( Tangentbordsläsare.hasNextDouble())
-	    talet = Tangentbordsläsare.nextDouble();
+	while (true) {
+	    if ( Tangentbordsläsare.hasNextDouble()) {
+		talet = Tangentbordsläsare.nextDouble();
+		break;
+	    } else {
+		Tangentbordsläsare.next();
+		System.out.print( "felaktig input - enbart siffror och komma, Vilket tal: ");
+	    }
+	}
 
 	System.out.println( "Talets rot: " + Math.sqrt(talet));
 	System.out.println( "Talets 10:exponent: " + Math.pow( talet, 10.0));
@@ -344,72 +354,102 @@ public class Uppgift {
     // 13
     //
     private static void TalIntervall() {
+	boolean aOkänt = true;
+	boolean bOkänt = true;
+	int a=0, b=0;
+
+	System.out.println();
+	System.out.print( "Mata in två heltal (a och b) med mellanslag mellan : ");
+
+	while (true) {
+	    if ( Tangentbordsläsare.hasNextInt() ) {
+		if (aOkänt) {
+		    a = Tangentbordsläsare.nextInt();
+		    aOkänt = false;
+		} else {
+		    b = Tangentbordsläsare.nextInt();
+		    Tangentbordsläsare.nextLine();
+		    break;
+		}
+	    } else {
+		Tangentbordsläsare.next();
+	    }
+	}
+
+	System.out.println( "talen är: " + a + " och " + b);
+	System.out.println( "mellanliggande blir: ");
+	    for ( int i = Math.min(a,b)+1 ; i < Math.max(a,b) ; i++) {
+		System.out.println( i );
+	    }
+
+	System.out.println();
     }
+
     //
     // 14
     //
     private static void SorteringAvTalföljd() {
-	System.out.println( "SorteringAvTalföljd Hello world");
+	String rad = "";
 
+	Tangentbordsläsare.nextLine();
+	System.out.println();
+	System.out.println( "Sortering av en talföljd");
+
+	System.out.print( "mata in en talföljd (heltal uppdelade med \",\")");
+	while ( true) {
+	    if ( Tangentbordsläsare.hasNextLine()) {
+		rad = Tangentbordsläsare.nextLine();
+		break;
+	    }
+	}
+
+	List<Integer> listaAttSorteras = new ArrayList<>();
+	Scanner radläsare = new Scanner(rad).useDelimiter(",");
+	while ( radläsare.hasNext() ) {
+	    if ( radläsare.hasNextInt() ) {
+		listaAttSorteras.add( radläsare.nextInt());
+	    } else if ( radläsare.hasNext() ) {
+		radläsare.next();
+	    }
+	}
+	radläsare.close();
+	Collections.sort(listaAttSorteras);
+	Iterator<Integer> iterator = listaAttSorteras.listIterator(0);
+	while (iterator.hasNext()) {
+	    System.out.print(" " + iterator.next());
+	}
+	System.out.println();
     }
     //
     // 15
     //
     private static void SummeringAvTalföljd() {
 	long summa=0;
-	boolean fortsätt = true;
 	String rad = "";
 
+	Tangentbordsläsare.nextLine();
 	System.out.println();
 	System.out.println( "Summering av en heltalsföljd");
 
+	System.out.print( "mata in en talföljd (heltal uppdelade med \",\")");
 	while ( true) {
-	    if ( Tangentbordsläsare.hasNext()) {
-		rad = Tangentbordsläsare.next();
+	    if ( Tangentbordsläsare.hasNextLine()) {
+		rad = Tangentbordsläsare.nextLine();
 		break;
 	    }
 	}
 
 	Scanner radläsare = new Scanner(rad).useDelimiter(",");
-	int maxantal = 10;
-
 	while ( radläsare.hasNext() ) {
-	    System.out.println("läser raden");
 	    if ( radläsare.hasNextInt() ) {
 		summa = summa+radläsare.nextInt();
 	    } else if ( radläsare.hasNextLong() ) {
 		summa = summa+radläsare.nextLong();
 	    } else if ( radläsare.hasNext() ) {
-		String slask = radläsare.next();
+		radläsare.next();
 	    }
-
-	    if (maxantal == 0) {
-		break;
-	    }
-	    maxantal=maxantal-1;
 	}
 	radläsare.close();
-
-	// Tangentbordsläsare.useDelimiter(" ,\\p{javaWhitespace}");
-
-	//while( Tangentbordsläsare.hasNext() )
-	// {
-	//	tal = Tangentbordsläsare.nextInt();
-	//	summa = summa + tal;
-	// }
-	// while( fortsätt){
-	//     if ( Tangentbordsläsare.hasNextInt()) {
-	//	tal = Tangentbordsläsare.nextInt();
-	//	summa = summa + tal;
-	//     }
-	//     else if( Tangentbordsläsare.hasNextLine()) {
-	//	fortsätt = false;
-	//     }
-	// }
-	//
-	// inmatningsraden är på formen:
-	//   32453,34534,43,36,6,345
-	//
 
 	System.out.println( "Summa: "+ summa);
 	System.out.println( "rad: "+ rad);
