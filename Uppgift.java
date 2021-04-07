@@ -1,10 +1,10 @@
-// Time-stamp: <2021-04-07 12:44:57 stefan>
+//
+// Time-stamp: <2021-04-07 13:43:43 stefan>
 //
 
 // import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.File;
-// import java.math.BigInteger;
 import java.text.DateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -115,8 +115,35 @@ public class Uppgift {
     // 6
     //
     private static void GissaEttNummer() {
+	Random slumptalKälla = new Random();
+	int framslumpat = 1 + slumptalKälla.nextInt( 101-1);
+	int inmatat;
+	int antalgissningar=0;
+
+	System.out.println();
 	System.out.println( "Gissningsleken: gissa ett tal!");
 
+	while(true) {
+	    System.out.print( "mata in gissning: ");
+	    if ( Tangentbordsläsare.hasNextInt() ) {
+		inmatat = Tangentbordsläsare.nextInt();
+		antalgissningar++;
+
+		if (inmatat == framslumpat) {
+		    System.out.println( "rätt: " + inmatat + " är lika med " + framslumpat + " " + antalgissningar + " st gissningar var tillräckligt");
+		    break;
+		} else {
+		    if ( inmatat > framslumpat )
+			System.out.println( "fel, för stort, försök igen");
+		    else
+			System.out.println( "fel, för litet, försök igen");
+		}
+	    } else if  ( Tangentbordsläsare.hasNext() ) { // hoppa över icke-siffror i strömmen
+		Tangentbordsläsare.next();
+	    }
+	}
+
+	System.out.println();
     }
     //
     // 7
@@ -125,19 +152,26 @@ public class Uppgift {
 	String dumpFilNamn = "./en_datasamling";
 	String radsomskrivs;
 
-	while (true) {
-	    if (Tangentbordsläsare.hasNextLine()) {
-		radsomskrivs = Tangentbordsläsare.nextLine();
-		break;
-	    }
-	}
-	System.out.println( "skriven rad" + radsomskrivs);
+	Tangentbordsläsare.nextLine();
+	System.out.println();
+	System.out.print( "skriv en kort rad som skrivs in i en fil: ");
 
 	try {
 	    File dump = new File(dumpFilNamn);
 	    Formatter dumpström = new Formatter(dump);
 
-	    dumpström.format( "%s\n", radsomskrivs);
+	    while (true) {
+		if (Tangentbordsläsare.hasNextLine()) {
+		    radsomskrivs = Tangentbordsläsare.nextLine();
+		    dumpström.format( "%s\n", radsomskrivs);
+		    break;
+		} else if  (Tangentbordsläsare.hasNext()) {
+		    radsomskrivs = Tangentbordsläsare.next();
+		    dumpström.format( "%s", radsomskrivs);
+		}
+	    }
+
+	    // dumpström.format( "%s\n", radsomskrivs);
 	    dumpström.close();
 	} catch (Exception någotFel) {
 	    System.out.println( någotFel.getMessage());
@@ -154,11 +188,14 @@ public class Uppgift {
 	    {
 		Scanner läsFrånFil = new Scanner( new File( "en_datasamling"));
 
-		// while ( läsFrånFil.hasNextLong())
-		//     {
-		//	//string rad = läsfrånfil.
-		//	//System.out.println( rad);
-		//     }
+		while ( true ){
+		    if (läsFrånFil.hasNextLine()) {
+			System.out.println(läsFrånFil.nextLine());
+			break;
+		    } else if (läsFrånFil.hasNext()) {
+			System.out.println(läsFrånFil.next());
+		    }
+		}
 	    }
 	catch (Exception ickeExisterandeFil) {
 	    System.out.println( ickeExisterandeFil.getMessage());
