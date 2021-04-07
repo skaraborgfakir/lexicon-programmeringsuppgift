@@ -1,5 +1,5 @@
 //
-// Time-stamp: <2021-04-07 14:47:52 stefan>
+// Time-stamp: <2021-04-07 15:31:35 stefan>
 //
 
 // import java.io.BufferedReader;
@@ -415,9 +415,11 @@ public class Uppgift {
 	radläsare.close();
 	Collections.sort(listaAttSorteras);
 	Iterator<Integer> iterator = listaAttSorteras.listIterator(0);
+	System.out.print( "nummerföljden sorterad: ");
 	while (iterator.hasNext()) {
 	    System.out.print(" " + iterator.next());
 	}
+	System.out.println();
 	System.out.println();
     }
     //
@@ -460,8 +462,68 @@ public class Uppgift {
     // 16
     //
     private static void TvåKlasser() {
-	System.out.println();
-	System.out.println( "TvåKlasser");
+	class Avatar {
+	    String avatarsNamn;
+	    int hälsa=0;
+	    int styrka=0;
+	    int tur=0;
+
+	    Avatar(String namn) {
+		Random slumptalKälla = new Random();
+		hälsa = 1 + slumptalKälla.nextInt( 101-1);
+		styrka = 1 + slumptalKälla.nextInt( 101-1);
+		tur = 1 + slumptalKälla.nextInt( 101-1);
+
+		avatarsNamn = namn;
+	    }
+	    void printVars()
+	    {
+		System.out.println("namn: "+ avatarsNamn);
+		System.out.println("\thälsa: "+ hälsa);
+		System.out.println("\tstyrka: "+ styrka );
+		System.out.println("\ttur: "+ tur );
+	    }
+	};
+
+	String egenAvatarsNamn="";
+	String enFiendesNamn="";
+
+	if (Tangentbordsläsare.hasNextLine()) // rensa bort kvarstående radmatningar
+	    Tangentbordsläsare.nextLine();
+
+	System.out.println( "Två spelkaraktärer: min egen och ett monster");
+	System.out.print( "min egen avatars namn: ");
+	while (true) {
+	    if ( Tangentbordsläsare.hasNextLine() ) {
+		if (egenAvatarsNamn=="") {
+		    egenAvatarsNamn = Tangentbordsläsare.nextLine();
+		} else {
+		    egenAvatarsNamn = egenAvatarsNamn + " " + Tangentbordsläsare.nextLine();
+		}
+		break;
+	    }
+	}
+
+	System.out.print( "monstrets namn: ");
+	while (true) {
+	    if ( Tangentbordsläsare.hasNextLine() ) {
+		if (enFiendesNamn=="") {
+		    enFiendesNamn = Tangentbordsläsare.nextLine();
+		} else {
+		    enFiendesNamn = enFiendesNamn + " " + Tangentbordsläsare.nextLine();
+		}
+		break;
+	    }
+	}
+
+	Avatar minEgenAvatar = new Avatar( egenAvatarsNamn);
+	Avatar enFiende      = new Avatar( enFiendesNamn);
+
+	System.out.println("mitt egen avatar: ");
+	minEgenAvatar.printVars();
+	System.out.println("monstret: ");
+	enFiende.printVars();
+
 	System.out.println();
     }
 
